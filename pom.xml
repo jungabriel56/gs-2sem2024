@@ -32,7 +32,7 @@
 		<springdoc-openapi.version>2.5.0</springdoc-openapi.version>
 		<modelmapper.version>3.2.0</modelmapper.version>
 	</properties>
-		<dependencies>
+	<dependencies>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
