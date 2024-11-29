@@ -1,0 +1,21 @@
+services:   
+  database:
+    image: "mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_pwd
+
+  api:
+    build: .
+    image: ecommerce:1.0
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
+    # env_file:
+    #   - .env
+    environment:
+      - DATABASE_URL=jdbc:mysql://database:3306/api?createDatabaseIfNotExist=true
+      - DATABASE_USER=root
+      - DATABASE_PWD=root_pwd   
