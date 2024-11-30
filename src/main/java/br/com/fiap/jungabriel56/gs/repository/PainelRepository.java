@@ -11,7 +11,7 @@ import br.com.fiap.jungabriel56.gs.model.Painel;
 public interface PainelRepository 
 	extends JpaRepository<Painel, Long> {
 
-	<T> T findByNome(String nome, Class<T> type);
-	<T> List<T> findAllByNome(String nome, Class<T> type);
-	<T> List<T> findAllByNomeContains(String nome, Class<T> type);
+	<T> T findByModelo(String modelo, Class<T> type);
+	<T> List<T> findAllByModelo(String modelo, Class<T> type);
+	<T> List<T> findAllByModeloContains(String modelo, Class<T> type);
 }

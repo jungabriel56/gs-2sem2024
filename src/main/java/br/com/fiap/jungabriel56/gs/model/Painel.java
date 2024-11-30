@@ -23,13 +23,10 @@ public class Painel {
     @Column(nullable = false, length = 5)
     private int tamanho;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, precision = 16, scale = 2)
     private BigDecimal valor;
 
     @Column(nullable = false, length = 60)
     private String marca;
-
-
-
 
 }

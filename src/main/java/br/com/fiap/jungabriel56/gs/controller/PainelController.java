@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.fiap.jungabriel56.gs.dtos.PainelRequestCreateDto;
 import br.com.fiap.jungabriel56.gs.dtos.PainelRequestUpdateDto;
 import br.com.fiap.jungabriel56.gs.dtos.PainelResponseDto;
 import br.com.fiap.jungabriel56.gs.mapper.PainelMapper;
+import br.com.fiap.jungabriel56.gs.model.Painel;
 import br.com.fiap.jungabriel56.gs.repository.PainelRepository;
 import br.com.fiap.jungabriel56.gs.service.PainelService;
-import br.com.fiap.jungabriel56.gs.views.PainelFullView;
-import br.com.fiap.jungabriel56.gs.views.PainelSimpleView;
-import br.com.fiap.jungabriel56.gs.views.PainelViewType;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,6 +31,7 @@ public class PainelController {
     private final PainelService painelService;
     private final PainelMapper painelMapper;
     private final PainelRepository painelRepository;
+    
 
     @GetMapping
     public ResponseEntity<List<PainelResponseDto>> list() {
@@ -46,6 +45,11 @@ public class PainelController {
 
     @PostMapping
     public ResponseEntity<PainelResponseDto> create(@RequestBody PainelRequestCreateDto dto) {        
+
+        System.out.println(dto.getMarca());
+        System.out.println(dto.getModelo());
+        System.out.println(dto.getTamanho());
+        System.out.println(dto.getValor());
 
         return ResponseEntity
         		.status(HttpStatus.CREATED)
@@ -91,15 +95,9 @@ public class PainelController {
     
     @GetMapping("/modelo")
     public  ResponseEntity<?> findByModelo(
-                @RequestParam String modelo, 
-                PainelViewType type) { 
+                @RequestParam String modelo) { 
 
-        switch (type) {
-            case FULL:
-                return ResponseEntity.ok().body(painelRepository.findAllByNomeContains(modelo, PainelFullView.class));                
-            case SIMPLE:
-                return ResponseEntity.ok().body(painelRepository.findAllByNomeContains(modelo, PainelSimpleView.class));            
-        }
-        return ResponseEntity.noContent().build();
+
+        return ResponseEntity.ok().body(painelRepository.findAllByModeloContains(modelo, Painel.class));
     }
 }

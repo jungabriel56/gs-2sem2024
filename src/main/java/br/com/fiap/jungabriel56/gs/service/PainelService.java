@@ -33,5 +33,6 @@ public class PainelService {
     public Optional<Painel> findById(Long id) {
         return painelRepository.findById(id);
     }
+    
    
 }
